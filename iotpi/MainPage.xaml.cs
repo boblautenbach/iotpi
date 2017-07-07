@@ -139,6 +139,7 @@ namespace iotpi
                 //log
             }
         }
+
         // Recognizer generated results
         async private void RecognizerResultGenerated(SpeechContinuousRecognitionSession session, SpeechContinuousRecognitionResultGeneratedEventArgs args)
         {

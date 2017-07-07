@@ -53,12 +53,14 @@ namespace iotpi
                 using (var intentRecognizer = new SpeechRecognizer())
                 {
                     var compilationResult = await intentRecognizer.CompileConstraintsAsync();
-
                     // If successful, display the recognition result.
                     if (compilationResult.Status == SpeechRecognitionResultStatus.Success)
                     {
+                        // change default of 5 seconds
+                        intentRecognizer.Timeouts.InitialSilenceTimeout = TimeSpan.FromSeconds(10);
+                        // change default of 0.5 seconds
+                        intentRecognizer.Timeouts.EndSilenceTimeout = TimeSpan.FromSeconds(5);
                         SpeechRecognitionResult result = await intentRecognizer.RecognizeAsync();
-
                         if (result.Status == SpeechRecognitionResultStatus.Success)
                         {
                             spokenWord = result.Text;
@@ -78,9 +80,8 @@ namespace iotpi
                         var speech = messages[0].GetObject();
                         var output = speech["speech"].ToString();
 
-                        await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => 
-                        {
-                            PlayResponse(output); ;
+                        await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>   {
+                            PlayResponse(output); 
                         });
                     }
                 }
@@ -91,6 +92,7 @@ namespace iotpi
             }
             finally
             {
+                //result the main recognition session to listen for trigger word
                 await recognizer.ContinuousRecognitionSession.StartAsync();
             }
         }

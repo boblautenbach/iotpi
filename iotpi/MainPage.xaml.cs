@@ -8,16 +8,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Linq;
 using Windows.Data.Json;
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace iotpi
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
         // Speech Recognizer
@@ -52,7 +45,6 @@ namespace iotpi
 
         private async Task InitializeIntentRecognizer()
         {
-
             string spokenWord = string.Empty;
 
             try
@@ -102,7 +94,6 @@ namespace iotpi
                 await recognizer.ContinuousRecognitionSession.StartAsync();
             }
         }
-
 
         // Initialize Speech Recognizer and start async recognition
         private async Task InitializeSpeechRecognizer()
@@ -177,7 +168,6 @@ namespace iotpi
                     text +
                     "</speak>";
   
-
                 var voices = SpeechSynthesizer.AllVoices;
                 using (var speech = new SpeechSynthesizer())
                 {

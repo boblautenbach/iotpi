@@ -39,7 +39,6 @@ namespace iotpi
         {
             base.OnNavigatedTo(e);
 
-
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", APIKEY);
             await InitializeSpeechRecognizer();
         }
@@ -96,6 +95,7 @@ namespace iotpi
             }
             catch (Exception ex)
             {
+                //log
             }
             finally
             {
@@ -124,6 +124,7 @@ namespace iotpi
             }
             catch (Exception ex)
             {
+                //log
             }
         }
 
@@ -144,6 +145,7 @@ namespace iotpi
             }
             catch (Exception ex)
             {
+                //log
             }
         }
         // Recognizer generated results
@@ -158,6 +160,7 @@ namespace iotpi
             }
             catch (Exception ex)
             {
+                //log
             }
         }
 
@@ -189,6 +192,7 @@ namespace iotpi
             }
             catch (Exception ex)
             {
+                //log
             }
         }
     }

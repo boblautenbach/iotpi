@@ -8,6 +8,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Linq;
 using Windows.Data.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Dynamic;
 
 namespace iotpi
 {
@@ -73,12 +76,8 @@ namespace iotpi
                     if (!string.IsNullOrEmpty(spokenWord))
                     {
                         var result = await client.GetStringAsync(baseURL + "&sessionId=" + Guid.NewGuid().ToString() + "&query=" + Uri.EscapeUriString(spokenWord));
-                        var json  = JsonObject.Parse(result);
-                        var results = json["result"].GetObject();
-                        var fulfillment = results["fulfillment"].GetObject();
-                        var messages = fulfillment["messages"].GetArray();
-                        var speech = messages[0].GetObject();
-                        var output = speech["speech"].ToString();
+                        var results = JObject.Parse(result);
+                        var output = (string)results["result"]["fulfillment"]["speech"];
 
                         await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>   {
                             PlayResponse(output); 

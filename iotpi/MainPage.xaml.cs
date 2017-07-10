@@ -75,7 +75,8 @@ namespace iotpi
                 {
                     if (!string.IsNullOrEmpty(spokenWord))
                     {
-                        var result = await client.GetStringAsync(baseURL + "&sessionId=" + Guid.NewGuid().ToString() + "&query=" + Uri.EscapeUriString(spokenWord));
+                        var result = await client.GetStringAsync(baseURL + "&sessionId=" + Guid.NewGuid().ToString() + 
+                                "&query=" + Uri.EscapeUriString(spokenWord));
                         var results = JObject.Parse(result);
                         var output = (string)results["result"]["fulfillment"]["speech"];
 
